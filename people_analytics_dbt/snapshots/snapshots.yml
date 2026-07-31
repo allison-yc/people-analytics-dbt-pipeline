@@ -1,0 +1,23 @@
+version: 2
+
+snapshots:
+  - name: snp_employee_history
+    description: >
+      Type 2 employee history. A new version is created when a tracked
+      organizational, compensation, location, or termination attribute changes.
+    columns:
+      - name: employee_id
+        description: Natural employee identifier from Workday.
+        data_tests:
+          - not_null
+      - name: dbt_scd_id
+        description: dbt-generated unique identifier for each employee version.
+        data_tests:
+          - unique
+          - not_null
+      - name: dbt_valid_from
+        description: Timestamp when this version became current in the snapshot.
+        data_tests:
+          - not_null
+      - name: dbt_valid_to
+        description: Timestamp when this version was superseded; null for the current version.

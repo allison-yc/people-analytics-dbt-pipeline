@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: dim_employees
+    description: >
+      Slowly changing employee dimension. Each row represents an employee's
+      attributes for one dbt snapshot validity period.
+    columns:
+      - name: employee_scd_key
+        description: dbt-generated surrogate key for an employee dimension version.
+        data_tests:
+          - unique
+          - not_null
+      - name: employee_id
+        description: Workday natural employee identifier.
+        data_tests:
+          - not_null
+      - name: valid_from
+        description: Timestamp when the dimension version became valid.
+        data_tests:
+          - not_null
+
+  - name: fact_employee_events
+    description: >
+      Event-grain employee fact table. Each row represents one dated HR
+      transaction, linked to the employee dimension version valid at the event time.
+    columns:
+      - name: employee_event_key
+        description: Natural unique identifier for the HR transaction.
+        data_tests:
+          - unique
+          - not_null
+      - name: employee_id
+        description: Workday natural employee identifier associated with the event.
+        data_tests:
+          - not_null
+      - name: event_date
+        description: Effective date of the HR event.
+        data_tests:
+          - not_null
+      - name: event_type
+        description: Category of employee lifecycle or job-change event.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [Hire, Promotion, Transfer, Compensation Change, Termination]
