@@ -1,1 +1,6 @@
 *.duckdb
+logs/
+*.log
+.DS_Store
+people_analytics_dbt/target/
+people_analytics_dbt/dbt_packages/

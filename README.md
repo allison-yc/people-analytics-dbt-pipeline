@@ -77,7 +77,7 @@ people_analytics_dbt:
   outputs:
     dev:
       type: duckdb
-      path: /absolute/path/to/people-analytics-dbt-pipeline/people_analytics.duckdb
+      path: ./people_analytics.duckdb
       threads: 1
 ```
 
