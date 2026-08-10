@@ -45,3 +45,34 @@ models:
           - accepted_values:
               arguments:
                 values: [Hire, Promotion, Transfer, Compensation Change, Termination]
+
+  - name: agg_monthly_turnover
+    description: >
+      Monthly workforce turnover metrics by department. Headcount is evaluated
+      against the employee SCD validity window at each month's first and last day.
+    columns:
+      - name: monthly_department_key
+        description: Composite surrogate key for the reporting month and department.
+        data_tests:
+          - unique
+          - not_null
+      - name: reporting_month
+        description: First calendar day of the reporting month.
+        data_tests:
+          - not_null
+      - name: department
+        description: Department for the workforce metrics.
+        data_tests:
+          - not_null
+      - name: beginning_headcount
+        description: Distinct active employees at the start of the month.
+        data_tests:
+          - not_null
+      - name: ending_headcount
+        description: Distinct active employees at the end of the month.
+        data_tests:
+          - not_null
+      - name: terminations
+        description: Count of termination events effective during the month.
+        data_tests:
+          - not_null
