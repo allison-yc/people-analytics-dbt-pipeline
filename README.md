@@ -1,4 +1,4 @@
-# People Analytics DWH & Executive BI Pipeline
+# People Analytics Data Warehouse | End-to-End Analytics Engineering Project
 
 An end-to-end People Analytics portfolio project that turns simulated Workday HCM extracts into a tested, historical data warehouse and executive dashboard.
 
